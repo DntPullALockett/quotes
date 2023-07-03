@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/spf13/viper"
@@ -45,5 +44,5 @@ func main() {
 		return c.JSON(data)
 	})
 
-	log.Println(app.Listen("0.0.0.0:" + port))
+	app.Listen("0.0.0.0:" + port)
 }
