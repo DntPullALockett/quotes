@@ -1,7 +1,9 @@
 package main
 
 import (
-	"github.com/gofiber/fiber"
+	"log"
+
+	"github.com/gofiber/fiber/v2"
 	"rsc.io/quote"
 )
 
@@ -19,4 +21,6 @@ func main() {
 
 		return c.JSON(data)
 	})
+
+	log.Fatal(app.Listen(":3000"))
 }
