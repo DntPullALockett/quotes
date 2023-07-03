@@ -7,20 +7,36 @@ import (
 	"rsc.io/quote"
 )
 
-type response struct {
-	quote string
+type SomeQuote struct {
+	Quote string
+}
+
+type SomeStruct struct {
+	Name string
+	Age  uint8
 }
 
 func main() {
 	app := fiber.New()
 
 	app.Get("/api/quote", func(c *fiber.Ctx) error {
-		data := response{
-			quote: quote.Glass(),
+		quote := quote.Glass()
+		data := SomeQuote{
+			Quote: quote,
 		}
 
 		return c.JSON(data)
 	})
 
-	log.Fatal(app.Listen(":3000"))
+	app.Get("/json", func(c *fiber.Ctx) error {
+		// Create data struct:
+		data := SomeStruct{
+			Name: "Grame",
+			Age:  20,
+		}
+
+		return c.JSON(data)
+	})
+
+	log.Println(apo.ListenAndServe(":"+port)
 }
