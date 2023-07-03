@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/spf13/viper"
 	"rsc.io/quote"
 )
 
@@ -17,6 +19,11 @@ type SomeStruct struct {
 }
 
 func main() {
+	viper.SetConfigFile("ENV")
+	viper.ReadInConfig()
+	viper.AutomaticEnv()
+	port := fmt.Sprint(viper.Get("PORT"))
+
 	app := fiber.New()
 
 	app.Get("/api/quote", func(c *fiber.Ctx) error {
@@ -38,5 +45,5 @@ func main() {
 		return c.JSON(data)
 	})
 
-	log.Println(apo.ListenAndServe(":"+port)
+	log.Println(app.Listen("0.0.0.0:" + port))
 }
